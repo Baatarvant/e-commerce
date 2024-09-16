@@ -1,14 +1,17 @@
 import useSWR from "swr";
-import { Card, CardSkeleton } from "../components";
-import { fetcher } from "../helpers";
+import { useRouter } from "next/router";
+import { fetcher } from "../../helpers";
+import { Card, CardSkeleton } from "../../components";
 import { useQueryState } from "nuqs";
 
-export default function Home() {
+export const ProductPage = () => {
+  const router = useRouter();
+  const { product } = router.query;
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR("https://fakestoreapi.com/products", fetcher);
+  } = useSWR(`https://fakestoreapi.com/products/category/${product}`, fetcher);
 
   const [search] = useQueryState("search");
 
@@ -30,7 +33,7 @@ export default function Home() {
   });
 
   return (
-    <div className="container mx-auto my-10">
+    <div className="container mx-auto mt-10">
       <div className="grid grid-cols-3 gap-4 place-items-center gap-y-6">
         {filteredProducts.map((product) => (
           <Card key={product.id} {...product} />
@@ -38,4 +41,5 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+export default ProductPage;
