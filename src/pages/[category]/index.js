@@ -4,14 +4,14 @@ import { fetcher } from "../../helpers";
 import { Card, CardSkeleton } from "../../components";
 import { useQueryState } from "nuqs";
 
-export const ProductPage = () => {
+export const CategoryPage = () => {
   const router = useRouter();
-  const { product } = router.query;
+  const { category } = router.query;
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR(`https://fakestoreapi.com/products/category/${product}`, fetcher);
+  } = useSWR(`https://fakestoreapi.com/products/category/${category}`, fetcher);
 
   const [search] = useQueryState("search");
 
@@ -42,4 +42,4 @@ export const ProductPage = () => {
     </div>
   );
 };
-export default ProductPage;
+export default CategoryPage;
