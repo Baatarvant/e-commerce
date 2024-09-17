@@ -9,7 +9,7 @@ export const Card = (props) => {
   const formattedDescription = description.split(" ").slice(0, 10).join(" ");
 
   const handleClick = () => {
-    router.push("/product/" + id);
+    router.push(`/${category}/${id}`);
   };
 
   return (
